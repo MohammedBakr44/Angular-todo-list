@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ToDo</title>
+</head>
+<body class="m-1 p-1">
+  
+    <h3 class="bg-primary text-white p-3">{{ getName() }}'s To Do List</h3>
+
+    <div class="my-1">
+      <label style="display: block">
+        <input type="text" class="form-control" #todoText />
+      </label>
+      <button class="btn btn-primary mt-1" (click)="addItem(todoText.value)">Add</button>
+    </div>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Description</th>
+          <th>Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of getTodoItems(); let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.action }}</td>
+          <td>
+              <label class="el-switch">
+                      <input type="checkbox" name="switch" [(ngModel)]="item.done">
+                      <span class="el-switch-style"></span>
+                    </label>
+          </td>
+          <td [ngSwitch]="item.done">
+            <span *ngSwitchCase="true">Yes</span>
+            <span *ngSwitchDefault>No</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</body>
+</html>
